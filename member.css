@@ -1,0 +1,104 @@
+@import url(https://www.cdnfonts.com/inter.font);
+
+body {
+    font-family: 'inter', sans-serif;
+    background-color: #000000;
+}
+
+.container-member {
+    background-color: #67E3FF;
+    min-height: 100vh;
+}
+
+.navbar-container {
+    display: flex;
+    background-color: #FFFFFF;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.navbar-container>.web-title {
+    text-decoration: none;
+    color: #67E3FF;
+    padding-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.navbar-container>.menu {
+    padding-right: 30px;
+    display: flex;
+    margin: auto 0;
+    gap: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.navbar-container>.menu>a {
+    text-decoration: none;
+    color: #67E3FF;
+    text-shadow: #555;
+}
+
+
+.column {
+    background-color: #67E3FF;
+    float: left;
+    padding-left: 50px;
+    width: 20%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+
+.bingkai {
+    width: 280px;
+    height: 430px;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color:#FFFFFF ;
+    border-radius: 30px;
+}
+
+.bingkai>img {
+    padding-left: 12px;
+    padding-top: 9px;
+    width: 250px;
+    height: 250px;
+    border-radius: 30px;
+}
+
+.container-ft {
+    padding: 0 16px;
+    text-align: center;
+}
+
+.container-ft::after,
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.title {
+    color: grey;
+}
+.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color:#67E3FF ;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    width: 80%;
+}
+
+.button:hover {
+    background-color: #555;
+}
+
+.menu a.active {
+    color: #FFC200; /* Set the desired active link color */
+}
