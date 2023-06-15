@@ -4,7 +4,10 @@
 
 
 .weather__header {
-    display: flex;
+    display: grid;
+    /* grid-template-columns: repeat(3, 1fr);
+    gap: 10px; */
+    /* grid-auto-rows: minmax(100px, auto); */
     align-items: center;
     justify-content: space-evenly;
     margin: 1rem;
@@ -27,8 +30,10 @@ input::placeholder {
 }
 
 .weather__search {
-    position: relative;
     display: flex;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
     justify-content: center;
     align-items: center;
 }
@@ -41,6 +46,8 @@ input::placeholder {
 }
 
 .weather__units {
+    grid-column: 3;
+    grid-row: 1;
     font-size: 1.3rem;
     /* display: flex; */
     align-items: center;
@@ -64,6 +71,9 @@ input::placeholder {
 }
 
 .weather__longlat {
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* grid-column: 2; */
+    /* grid-row: 1; */
     background-color: #f9f9f9;
     padding: 0.6rem 5rem;
     border-radius: 20px;
@@ -74,6 +84,7 @@ input::placeholder {
     transition: background-color 0.3s ease;
 }
 
+
 .weather__longlat:hover {
     background-color: #bcf1ff;
 }
@@ -82,11 +93,15 @@ input::placeholder {
     font-size: 18px;
     color: rgb(7, 79, 94);
     margin-right: 5px;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .weather__longlat span {
     font-size: 16px;
     color: rgb(7, 79, 94);
+    grid-column: 2;
+    grid-row: 1;
 }
 
 

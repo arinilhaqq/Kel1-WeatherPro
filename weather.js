@@ -3,6 +3,7 @@ let currCity = "Jakarta";
 let units = "metric";
 let isLonglat = false;
 
+
 // Selectors
 let city = document.querySelector(".weather__city");
 let datetime = document.querySelector(".weather__datetime");
@@ -68,7 +69,9 @@ function getWeatherByCoordinates(latitude, longitude) {
 function displayWeather(data) {
     // Update DOM elements with weather data
     city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`
-    datetime.innerHTML = convertTimeStamp(data.dt, data.timezone);
+    updateDateTime(data.timezone);
+    // setInterval(updateDateTime, 1000, data.timezone);
+    // datetime.innerHTML = convertTimeStamp(data.dt, data.timezone);
     weather__forecast.innerHTML = `<p>${data.weather[0].main}`
     weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176`
     weather__icon.innerHTML = `   <img src="${data.weather[0].main}.png" />`
@@ -77,6 +80,9 @@ function displayWeather(data) {
     weather__humidity.innerHTML = `${data.main.humidity}%`
     weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph" : "m/s"}`
     weather__pressure.innerHTML = `${data.main.pressure} hPa`
+    setInterval(function () {
+        updateDateTime(data.timezone);
+      }, 1000);
 }
 
 // Convert country code to name
@@ -86,11 +92,53 @@ function convertCountryCode(country) {
 }
 
 // Convert timestamp to formatted date and time
-function convertTimeStamp(timestamp, timezone){
-     const convertTimezone = timezone / 3600; // convert seconds to hours 
+// function convertTimeStamp(timestamp, timezone){
+//     const convertTimezone = timezone / 3600; // convert seconds to hours 
+
+//     const date = new Date(timestamp * 1000);
+    
+//     const options = {
+//         weekday: "long",
+//         day: "numeric",
+//         month: "long",
+//         year: "numeric",
+//         hour: "numeric",
+//         minute: "numeric",
+//         timeZone: `Etc/GMT${convertTimezone >= 0 ? "-" : "+"}${Math.abs(convertTimezone)}`,
+//         hour12: true,
+//     }
+//     return date.toLocaleString("en-US", options)
+   
+// }
+
+function updateDateTime(timezone) {
+    const timestamp = Date.now() / 1000;
+    const offset = new Date().getTimezoneOffset() * 60; 
+  
+    const localTimestamp = timestamp + timezone + offset;
+  
+    const formattedDate = convertTimeStamp(localTimestamp, timezone);
+    datetime.innerHTML = formattedDate;
+  }
+
+// function updateDateTime(timezone) {
+//     const intervalId = setInterval(() => {
+//       const timestamp = Date.now() / 1000; // current timestamp in seconds
+//       const offset = new Date().getTimezoneOffset() * 60; // timezone offset in seconds
+  
+//       const localTimestamp = timestamp + timezone + offset; // calculate the local timestamp
+  
+//       const formattedDate = convertTimeStamp(localTimestamp, timezone);
+//       datetime.innerHTML = formattedDate;
+//     }, 1000);
+// }
+  
+
+function convertTimeStamp(timestamp, timezoneOffset) {
+    const convertTimezone = timezoneOffset / 3600; // convert seconds to hours 
 
     const date = new Date(timestamp * 1000);
-    
+
     const options = {
         weekday: "long",
         day: "numeric",
@@ -98,11 +146,12 @@ function convertTimeStamp(timestamp, timezone){
         year: "numeric",
         hour: "numeric",
         minute: "numeric",
+        second: "numeric",
         timeZone: `Etc/GMT${convertTimezone >= 0 ? "-" : "+"}${Math.abs(convertTimezone)}`,
         hour12: true,
-    }
-    return date.toLocaleString("en-US", options)
-   
+    };
+
+    return date.toLocaleString("en-US", options);
 }
 
 // Search form submission event
@@ -113,7 +162,8 @@ document.querySelector(".weather__search").addEventListener('submit', e => {
     // Change current city
     currCity = search.value;
     // Get weather forecast by city name
-    getWeatherByCity(currCity);
+    setInterval(getWeatherByCity(currCity), 1000);
+    setInterval(getForecast(), 1000);
     // Clear form
     search.value = "";
 })
@@ -154,50 +204,21 @@ document.querySelector(".weather_unit_farenheit").addEventListener('click', () =
 })
 
 
-function GetInfo() {
-
-    var newName = document.getElementById("cityInput");
-    var cityName = document.getElementById("cityName");
-    cityName.innerHTML = "--"+newName.value+"--";
-
-fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appid=d2c621e47181ff427c2d3fe67c0b877a')
-.then(response => response.json())
-.then(data => {
-
-    //Getting the min and max values for each day
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1)+ "°";
-        //Number(1.3450001).toFixed(2); // 1.35
-    }
-
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°";
-    }
-    //------------------------------------------------------------
-
-    //Getting Weather Icons
-     for(i = 0; i<5; i++){
-        document.getElementById("img" + (i+1)).src = "http://openweathermap.org/img/wn/"+
-        data.list[i].weather[0].icon
-        +".png";
-    }
-    //------------------------------------------------------------
-    console.log(data)
-
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
-    }
-
-
-})
-
-.catch(err => alert("Something Went Wrong: Try Checking Your Internet Coneciton"))
-}
-
-function DefaultScreen(){
-    document.getElementById("cityInput").defaultValue = "London";
-    GetInfo();
-}
+function getForecast() {
+    const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${currCity}&appid=${API_KEY}`)
+      .then(response => response.json())
+      .then(data => {
+        // Getting the min and max values for each day
+        for (i = 0; i < 5; i++) {
+          document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1) + "°";
+          document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°";
+          document.getElementById("img" + (i + 1)).src = data.list[i].weather[0].main + ".png";
+          document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
+        }
+      })
+      .catch(err => alert("Something Went Wrong: Try Checking Your Internet Connection"));
+} 
 
 
 //Getting and displaying the text for the upcoming five days of the week
@@ -214,11 +235,9 @@ function CheckDay(day){
     }
 }
 
-// for(i = 0; i<5; i++){
-//     document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
-// }
-//------------------------------------------------------------
+for(i = 0; i<5; i++){
+    document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
+}
 
 
-
-document.body.addEventListener('load', getWeatherByCity(currCity), GetInfo())
+document.body.addEventListener('load', getWeatherByCity(currCity), getForecast())
