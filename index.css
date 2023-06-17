@@ -6,7 +6,6 @@ body {
 }
 
 .container {
-  /* background-color: #67E3FF; */
   background-image: linear-gradient(
     50deg,
     hsl(209deg 88% 32%) 0%,
@@ -95,17 +94,6 @@ body {
   justify-content: space-between;
   width: 1130px;
 }
-/* .section-flex > .deskripsi {
-  margin-top: -20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 1200px;
-} */
-
-/* .button > .image2-flex {
-  display: flex;
-} */
 
 .button{
   display: flex;
