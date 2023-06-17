@@ -57,6 +57,7 @@ body {
   font-weight: bold;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .navbar-container>.menu>a {
@@ -71,7 +72,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 40px;
   margin: 50px;
 }
 

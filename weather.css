@@ -79,6 +79,7 @@ input {
   outline: none;
   color: rgb(0, 0, 0);
   padding: 0.5rem 2.5rem;
+  padding-left: 30px;
   border-radius: 15px;
   width: 800px;
   height: 30px;
@@ -102,12 +103,12 @@ input::placeholder {
   color: rgb(7, 79, 94);
 }
 
-.weather__units {
+/* .weather__units {
   font-size: 1.3rem;
   align-items: center;
-}
+} */
 
-.weather__units span {
+/* .weather__units span {
   cursor: pointer;
   background-color: #f9f9f9;
   padding: 0.6rem 0.8rem;
@@ -122,7 +123,7 @@ input::placeholder {
 
 .weather__units span:hover {
   background-color: #bcf1ff;
-}
+} */
 
 .weather__longlat {
   background-color: #f9f9f9;
@@ -176,6 +177,29 @@ input::placeholder {
   border-radius: 30px;
   margin-bottom: 1rem;
   width: 100px;
+}
+
+.weather__units {
+  font-size: 1.3rem;
+  align-items: center;
+  color: #000000;
+}
+
+.weather__units span {
+  cursor: pointer;
+  background-color: #f9f9f9;
+  padding: 0.6rem 0.8rem;
+  height: 30px;
+  border-radius: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.weather__units span:first-child {
+  margin-right: 0.5rem;
+}
+
+.weather__units span:hover {
+  background-color: #bcf1ff;
 }
 
 .weather__temperature {
