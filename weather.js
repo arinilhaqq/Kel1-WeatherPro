@@ -84,6 +84,14 @@ function displayWeather(data) {
     intervalId = setInterval(function () {
       updateDateTime(Date.now() / 1000, data.timezone); // Update with current timestamp
     }, 1000);
+
+    if (units == "metric") {
+        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#bcf1ff";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffffff";
+    } else{
+        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffffff";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#bcf1ff";
+    }
   }
   
 
@@ -148,6 +156,8 @@ document.querySelector(".weather_unit_celsius").addEventListener('click', () => 
     } else {
       getWeatherByCity(currCity);
     }
+    document.querySelector(".weather_unit_celsius").style.backgroundColor = "#bcf1ff";
+    document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#FFFFFF";
   }
 });
 
@@ -159,6 +169,8 @@ document.querySelector(".weather_unit_farenheit").addEventListener('click', () =
     } else {
       getWeatherByCity(currCity);
     }
+    document.querySelector(".weather_unit_celsius").style.backgroundColor = "#FFFFFF";
+    document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#bcf1ff";
   }
 });
 
