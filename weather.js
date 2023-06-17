@@ -3,6 +3,7 @@ let currCity = "Jakarta";
 let units = "metric";
 let isLonglat = false;
 
+
 // Selectors
 let city = document.querySelector(".weather__city");
 let datetime = document.querySelector(".weather__datetime");
@@ -40,7 +41,7 @@ function getLatitudeLongitude() {
 
 // Get weather by city name
 function getWeatherByCity(city) {
-    const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
+    const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`)
         .then(res => res.json())
         .then(data => {
@@ -53,7 +54,7 @@ function getWeatherByCity(city) {
 
 // Get weather by coordinates
 function getWeatherByCoordinates(latitude, longitude) {
-    const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
+    const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`)
         .then(res => res.json())
         .then(data => {
@@ -114,6 +115,7 @@ document.querySelector(".weather__search").addEventListener('submit', e => {
     currCity = search.value;
     // Get weather forecast by city name
     getWeatherByCity(currCity);
+    GetInfo()
     // Clear form
     search.value = "";
 })
@@ -155,51 +157,29 @@ document.querySelector(".weather_unit_farenheit").addEventListener('click', () =
 
 
 function GetInfo() {
-
-    var newName = document.getElementById("cityInput");
-    var cityName = document.getElementById("cityName");
-    cityName.innerHTML = "--"+newName.value+"--";
-
-fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appid=d2c621e47181ff427c2d3fe67c0b877a')
-.then(response => response.json())
-.then(data => {
-
-    //Getting the min and max values for each day
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1)+ "°";
-        //Number(1.3450001).toFixed(2); // 1.35
-    }
-
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°";
-    }
-    //------------------------------------------------------------
-
-    //Getting Weather Icons
-     for(i = 0; i<5; i++){
-        document.getElementById("img" + (i+1)).src = "http://openweathermap.org/img/wn/"+
-        data.list[i].weather[0].icon
-        +".png";
-    }
-    //------------------------------------------------------------
-    console.log(data)
-
-    for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
-    }
-
-
-})
-
-.catch(err => alert("Something Went Wrong: Try Checking Your Internet Coneciton"))
-}
-
-function DefaultScreen(){
-    document.getElementById("cityInput").defaultValue = "London";
+    // var newName = document.getElementsByClassName("weather__searchform");
+    // var cityName = document.getElementById("cityName");
+    // cityName.innerHTML = "--" + newName.value + "--";
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' +  currCity + '&appid=86d88fac1164d4c3472d6e3666cf131f')
+      .then(response => response.json())
+      .then(data => {
+        // Getting the min and max values for each day /273.15
+        for (i = 0; i < 5; i++) {
+        document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min -273).toFixed(1) + "°";
+        document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max -273).toFixed(2) + "°";
+        document.getElementById("img" + (i + 1)).src = data.list[i].weather[0].main + ".png"; 
+        document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
+        }
+      })
+      .catch(err => alert("Something Went Wrong: Try Checking Your Internet Connection"));
+  }
+  
+  function DefaultScreen() {
     GetInfo();
-}
-
-
+  }
+  
+  // Rest of the code...
+  
 //Getting and displaying the text for the upcoming five days of the week
 var d = new Date();
 var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
@@ -214,11 +194,11 @@ function CheckDay(day){
     }
 }
 
-// for(i = 0; i<5; i++){
-//     document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
-// }
+for(i = 0; i<5; i++){
+    document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
+}
 //------------------------------------------------------------
 
 
 
-document.body.addEventListener('load', getWeatherByCity(currCity), GetInfo())
+document.body.addEventListener('load', getWeatherByCity(currCity), DefaultScreen())
