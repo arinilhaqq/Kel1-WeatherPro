@@ -78,6 +78,7 @@ input {
   outline: none;
   color: rgb(0, 0, 0);
   padding: 0.5rem 2.5rem;
+  padding-left: 30px;
   border-radius: 15px;
   width: 800px;
   height: 30px;
@@ -169,32 +170,26 @@ input::placeholder {
 }
 
 .weather__units {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem;
-    font-size: 1.3rem;
-  }
+  font-size: 1.3rem;
+  align-items: center;
+  color: #000000;
+}
 
 .weather__units span {
-    cursor: pointer;
-    background-color: #f9f9f9;
-    color: #000000;
-    padding: 0.4rem 0.8rem;
-    height: auto;
-    margin: 0.2rem;
-    border-radius: 15px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center; 
+  cursor: pointer;
+  background-color: #f9f9f9;
+  padding: 0.6rem 0.8rem;
+  height: 30px;
+  border-radius: 15px;
+  transition: background-color 0.3s ease;
 }
 
 .weather__units span:first-child {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .weather__units span:hover {
-    background-color: #bcf1ff;
+  background-color: #bcf1ff;
 }
 
 .weather__temperature {
