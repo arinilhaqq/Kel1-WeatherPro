@@ -1,54 +1,113 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
-@import url(https://www.cdnfonts.com/inter.font);
-@import 'index.css';
+@import url('https://fonts.cdnfonts.com/css/poppins');
 
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000000;
+}
+
+.container {
+  background-image: linear-gradient(
+    50deg,
+    hsl(209deg 88% 32%) 0%,
+    hsl(209deg 80% 36%) 8%,
+    hsl(209deg 76% 38%) 17%,
+    hsl(209deg 73% 41%) 27%,
+    hsl(209deg 71% 43%) 36%,
+    hsl(209deg 69% 45%) 47%,
+    hsl(209deg 68% 47%) 57%,
+    hsl(209deg 67% 49%) 66%,
+    hsl(209deg 68% 51%) 75%,
+    hsl(209deg 72% 53%) 84%,
+    hsl(209deg 77% 54%) 92%,
+    hsl(209deg 81% 56%) 100%
+  );
+}
+
+.navbar-container {
+  display: flex;
+  background-color: #ffffff;
+  margin: auto;
+  /* justify-content:space-between; */
+}
+
+.logo img {
+  /* float: left; */
+  margin-top: 20px;
+  width: 70px;
+  padding-left: 50px;
+}
+
+.navbar-container>.web-title {
+  text-decoration: none;
+  color: #3389d8;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.navbar-container>.menu {
+  padding-right: 30px;
+  padding-left: 750px;
+  display: flex;
+  margin: auto 0;
+  gap: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container>.menu>a {
+  text-decoration: none;
+  color: #3389d8;
+  text-shadow: #555;
+}
 
 .weather__header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 1rem;
     padding: 1rem;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 input {
-    border: none;
-    background: #fffdfd;
-    outline: none;
-    color: rgb(0, 0, 0);
-    padding: 0.5rem 2.5rem;
-    border-radius: 15px;
-    width: 900px; 
-    height: 30px;
+  border: none;
+  background: #fffdfd;
+  outline: none;
+  color: rgb(0, 0, 0);
+  padding: 0.5rem 2.5rem;
+  border-radius: 15px;
+  width: 800px;
+  height: 30px;
 }
 
 input::placeholder {
-    color: rgb(52, 55, 54);
+  color: rgb(52, 55, 54);
 }
 
 .weather__search {
     display: flex;
     position: relative;
-    grid-column: 1;
     justify-content: flex-end;
     align-items: center;
-    /* margin-right: 1rem; */
-    margin-left: 8rem;
 }
 
 .weather__search i {
-    position: absolute; 
-    right: 30px; 
-    font-size: 15px;
-    color: rgb(7, 79, 94);
+  position: absolute;
+  right: 30px;
+  font-size: 15px;
+  color: rgb(7, 79, 94);
+}
+
+.weather__searchform {
+    font-family: 'Poppins', sans-serif;
 }
 
 .weather__longlat {
-    grid-column: 2;
     background-color: #f9f9f9;
-    padding: 0.6rem 5rem;
+    padding: 0.6rem 3rem;
     border-radius: 20px;
     height: 50px;
     display: flex;
@@ -56,58 +115,57 @@ input::placeholder {
     cursor: pointer;
     transition: background-color 0.3s ease;
     justify-content: center;
-    margin-left: 1rem; /* Added margin-left */
+    outline-color: transparent;
+    margin-left: 1rem; 
 }
 
 .weather__longlat:hover {
-    background-color: #bcf1ff;
+  background-color: #bcf1ff;
 }
 
 .weather__longlat i {
     font-size: 18px;
     color: rgb(7, 79, 94);
-    /* margin-right: 5px; */
     grid-column: 1;
     grid-row: 1;
     margin-right: 6px;
-    /* margin-right: 5px; */
 }
 
 .weather__longlat span {
     font-size: 16px;
     color: rgb(7, 79, 94);
     grid-column: 2;
-    grid-row: 1;
     white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
 }
 
 
 
 .weather__body {
-    text-align: center;
-    margin-top: 3rem;
+  text-align: center;
+  margin-top: 3rem;
+  color: #ffffff;
 }
 
 .weather__datetime {
-    margin-bottom: 2rem;
-    font-size: 14px;
+  margin-bottom: 2rem;
+  font-size: 14px;
 }
 
 .weather__forecast {
-    /* background: #ffffff; */
-    display: inline-block;
-    padding: 0.4rem 2rem;
-    border-radius: 20px;
-    margin-bottom: 1rem;
+  display: inline-block;
+  padding: 0.4rem 2rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
 }
 
 .weather__icon img {
-    background: #ffffff;
-    display: inline-block;
-    padding: 0.3rem 2rem;
-    border-radius: 30px;
-    margin-bottom: 1rem;
-    width: 100px;
+  background: #ffffff;
+  display: inline-block;
+  padding: 0.3rem 2rem;
+  border-radius: 30px;
+  margin-bottom: 1rem;
+  width: 100px;
 }
 
 .weather__units {
@@ -121,13 +179,14 @@ input::placeholder {
 .weather__units span {
     cursor: pointer;
     background-color: #f9f9f9;
-    padding: 0.6rem 0.8rem;
-    height: 30px;
+    color: #000000;
+    padding: 0.4rem 0.8rem;
+    height: auto;
     margin: 0.2rem;
     border-radius: 15px;
     transition: background-color 0.3s ease;
-    display: flex; /* Add this line to enable vertical alignment */
-    align-items: center; /* Add this line to enable vertical alignment */
+    display: flex;
+    align-items: center; 
 }
 
 .weather__units span:first-child {
@@ -139,73 +198,141 @@ input::placeholder {
 }
 
 .weather__temperature {
-    font-size: 1.75rem;
+  font-size: 1.75rem;
 }
 
 .weather__minmax {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .weather__minmax p {
-    font-size: 14px;
-    margin: 0.5rem;
+  font-size: 14px;
+  margin: 0.5rem;
 }
 
 .weather__info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1rem;
-    margin-top: 3rem;
-    margin-left: 6rem;
-    margin-right: 6rem;
-    /* margin-bottom: 3rem; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+  margin-top: 3rem;
+  margin-left: 6rem;
+  margin-right: 6rem;
+  /* margin-bottom: 3rem; */
 }
 
 .weather__card {
-    display: flex;
-    align-items: center;
-    background: #fff9f9;
-    padding: 1rem;
-    border-radius: 30px;
+  display: flex;
+  align-items: center;
+  background: #fff9f9;
+  padding: 1rem;
+  border-radius: 30px;
 }
 
 .weather__card i {
-    font-size: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    color: rgb(22, 183, 215);
+  font-size: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: #3389D8;
 }
 
 .weather__card p {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .inner-card {
-    margin-left: 1rem;
-    margin-right: rem;
-    /* display: flex; */
-    justify-content: center;
+  margin-left: 1rem;
+  margin-right: rem;
+  /* display: flex; */
+  justify-content: center;
 }
 
-
-@media(max-width: 936px){
-    .container {
-        width: 90%;
-    }
-
-    .weather__header {
-        flex-direction: column;
-    }
-
-    .weather__units {
-        margin-top: 1rem;
-    }
+.Para1 {
+  font-size: 30px;
+  margin-top: 50px;
+  color: #ffffff;
 }
 
+.forecastContainer {
+  padding: 30px;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  color: black;
+  width: 900px;
+  align-items: center;
+  width: 90%;
+  margin: 20px auto;
+}
 
-@media(max-width: 400px){
-    .weather__info {
-        grid-template-columns: none;
-    }
+.forecastContainer .forecastIcons {
+  display: flex;
+}
+
+.forecastContainer .forecast {
+  padding: 5px 15px;
+  background: #ffc200;
+  color: black;
+  border-radius: 15px;
+  margin-top: 10px;
+  /* text-align: center; */
+  display: flex;
+}
+
+.forecastContainer .icons {
+  padding: 5px 15px;
+  color: black;
+  border-radius: 15px;
+  margin-top: 10px;
+  /* text-align: center; */
+  display: flex;
+  background-color: #fbfcfc;
+}
+
+.forecastIcons .icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0 10px;
+  border-radius: 10px;
+  padding-right: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image .imgClass {
+  width: 175px;
+  padding: 20px;
+  height: auto;
+}
+
+.minValues .maxValues {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.menu a.active {
+  background-color: #ffc200;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    width: 90%;
+  }
+
+  .weather__header {
+    flex-direction: column;
+  }
+
+  .weather__units {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .weather__info {
+    grid-template-columns: none;
+  }
 }

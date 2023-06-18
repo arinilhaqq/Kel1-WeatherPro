@@ -1,76 +1,113 @@
-@import url(https://www.cdnfonts.com/inter.font);
+@import url('https://fonts.cdnfonts.com/css/poppins');
 
-body{
-    font-family: 'inter',sans-serif;
-    background-color:#000000;
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #000000;
 }
 
 .container {
-    background-color: #67E3FF;
-    min-height: 100vh;
+  /* background-color: #67E3FF; */
+  background-image: linear-gradient(
+    50deg,
+    hsl(209deg 88% 32%) 0%,
+    hsl(209deg 80% 36%) 8%,
+    hsl(209deg 76% 38%) 17%,
+    hsl(209deg 73% 41%) 27%,
+    hsl(209deg 71% 43%) 36%,
+    hsl(209deg 69% 45%) 47%,
+    hsl(209deg 68% 47%) 57%,
+    hsl(209deg 67% 49%) 66%,
+    hsl(209deg 68% 51%) 75%,
+    hsl(209deg 72% 53%) 84%,
+    hsl(209deg 77% 54%) 92%,
+    hsl(209deg 81% 56%) 100%
+  );
+  min-height: 100vh;
 }
 
-.navbar-container{
-    display: flex;
-    background-color: #FFFFFF;
-    margin: auto;
-    justify-content:space-between;
+.navbar-container {
+  display: flex;
+  background-color: #ffffff;
+  margin: auto;
+  /* justify-content:space-between; */
 }
 
-.navbar-container>.web-title {
-    text-decoration: none;
-    color: #67E3FF;
-    padding-left: 20px;
-    font-size: 25px;
-    font-weight: bold;
-}
-.navbar-container>.menu {
-    padding-right: 30px;
-    display: flex;
-    margin: auto 0;
-    gap: 50px;
-    font-size: 15px;
-    font-weight: bold;
+.logo img {
+  /* float: left; */
+  margin-top: 20px;
+  width: 70px;
+  padding-left: 50px;
 }
 
-.navbar-container>.menu > a {
-    text-decoration: none;
-    color: #67E3FF;
-    text-shadow: #555;
+.navbar-container > .web-title {
+  text-decoration: none;
+  color: #3389d8;
+  /* padding-left: 20px; */
+  font-size: 25px;
+  font-weight: bold;
 }
 
-.content{
-    padding: 20px; 
-    color: #FFFFFF;
+.navbar-container > .menu {
+  padding-right: 30px;
+  padding-left: 750px;
+  display: flex;
+  margin: auto 0;
+  gap: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container > .menu > a {
+  text-decoration: none;
+  color: #3389d8;
+  text-shadow: #555;
+}
+
+.content {
+  margin: 55px;
+  padding-left: 25px;
+  color: #ffffff;
 }
 .h1 {
-    font-size: 50px;
-    color: #FFFFFF;
-    font-weight: 0;
-    width: 500px;
+  font-size: 60px;
+  color: #ffffff;
+  font-weight: 0;
+  width: 500px;
+  margin: 0px;
 }
-.h2{
-    width: 800px;
+.h2 {
+  width: 800px;
+  font-size: 30px;
 }
-.section-flex > .deskripsi{
-    display: flex;
+.section-flex > .deskripsi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1200px;
 }
- 
+
 button {
-    font-size: 25px;
-    font-weight: bold;
-    color: #FFC200;
-    margin-top: 0px;
-    line-height: 2;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    display: inline-block;
-    width: 20%;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffc200;
+  margin-top: 25px;
+  line-height: 2;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  display: inline-block;
+  width: 20%;
+}
+
+.go:hover{
+  background-color: #bcf1ff;
 }
 
 .menu a.active {
-    color: #FFC200; 
+  background-color: #ffc200;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
 }
-
-

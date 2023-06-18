@@ -42,28 +42,28 @@ function getLatitudeLongitude() {
 
 // Get weather by city name
 function getWeatherByCity(city) {
-  const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`)
-    .then(res => res.json())
-    .then(data => {
-      displayWeather(data);
-    })
-    .catch(error => {
-      console.error("Error fetching weather data:", error);
-    });
+    const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`)
+        .then(res => res.json())
+        .then(data => {
+            displayWeather(data);
+        })
+        .catch(error => {
+            console.error("Error fetching weather data:", error);
+        });
 }
 
 // Get weather by coordinates
 function getWeatherByCoordinates(latitude, longitude) {
-  const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
-  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`)
-    .then(res => res.json())
-    .then(data => {
-      displayWeather(data);
-    })
-    .catch(error => {
-      console.error("Error fetching weather data:", error);
-    });
+    const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`)
+        .then(res => res.json())
+        .then(data => {
+            displayWeather(data);
+        })
+        .catch(error => {
+            console.error("Error fetching weather data:", error);
+        });
 }
 
 // Display weather data
@@ -86,11 +86,11 @@ function displayWeather(data) {
     }, 1000);
 
     if (units == "metric") {
-        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#bcf1ff";
+        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffc200";
         document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffffff";
     } else{
         document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffffff";
-        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#bcf1ff";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffc200";
     }
   }
   
@@ -156,7 +156,7 @@ document.querySelector(".weather_unit_celsius").addEventListener('click', () => 
     } else {
       getWeatherByCity(currCity);
     }
-    document.querySelector(".weather_unit_celsius").style.backgroundColor = "#bcf1ff";
+    document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffc200";
     document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#FFFFFF";
   }
 });
@@ -170,7 +170,7 @@ document.querySelector(".weather_unit_farenheit").addEventListener('click', () =
       getWeatherByCity(currCity);
     }
     document.querySelector(".weather_unit_celsius").style.backgroundColor = "#FFFFFF";
-    document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#bcf1ff";
+    document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffc200";
   }
 });
 
