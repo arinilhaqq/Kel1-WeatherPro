@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 @import url(https://www.cdnfonts.com/css/Poppins);
-=======
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
-@import url('https://fonts.cdnfonts.com/css/poppins');
->>>>>>> 3c0803e6cd2f2f37d33b425c61db8a9e2371a832
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -38,7 +33,6 @@ body {
 }
 
 .logo img {
-  /* float: left; */
   margin-top: 20px;
   width: 70px;
   padding-left: 50px;
@@ -72,20 +66,17 @@ body {
 }
 
 .weather__header {
-<<<<<<< HEAD
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 1rem;
   padding: 1rem;
-=======
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1rem;
-    padding: 1rem;
-    justify-content: center;
->>>>>>> 3c0803e6cd2f2f37d33b425c61db8a9e2371a832
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 1rem;
+  justify-content: center;
 }
 
 .header {
@@ -111,18 +102,15 @@ input::placeholder {
 }
 
 .weather__search {
-<<<<<<< HEAD
   position: relative;
   display: flex;
   align-items: center;
   width: 50%;
   margin-left: 180px;
-=======
-    display: flex;
-    position: relative;
-    justify-content: flex-end;
-    align-items: center;
->>>>>>> 3c0803e6cd2f2f37d33b425c61db8a9e2371a832
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .weather__search i {
@@ -132,7 +120,6 @@ input::placeholder {
   color: rgb(7, 79, 94);
 }
 
-<<<<<<< HEAD
 .weather_searchform{
   font-family: 'Poppins', sans-serif;
 }
@@ -147,7 +134,8 @@ input::placeholder {
   cursor: pointer;
   transition: background-color 0.3s ease;
   outline-color: transparent;
-=======
+}
+
 .weather__searchform {
     font-family: 'Poppins', sans-serif;
 }
@@ -164,7 +152,6 @@ input::placeholder {
     justify-content: center;
     outline-color: transparent;
     margin-left: 1rem; 
->>>>>>> 3c0803e6cd2f2f37d33b425c61db8a9e2371a832
 }
 
 .weather__longlat:hover {
@@ -172,7 +159,6 @@ input::placeholder {
 }
 
 .weather__longlat i {
-<<<<<<< HEAD
   font-size: 18px;
   color: rgb(7, 79, 94);
   margin-right: 5px;
@@ -186,12 +172,11 @@ input::placeholder {
   grid-column: 2;
   white-space: nowrap;
   font-family: 'Poppins', sans-serif;
-=======
-    font-size: 18px;
-    color: rgb(7, 79, 94);
-    grid-column: 1;
-    grid-row: 1;
-    margin-right: 6px;
+  font-size: 18px;
+  color: rgb(7, 79, 94);
+  grid-column: 1;
+  grid-row: 1;
+  margin-right: 6px;
 }
 
 .weather__longlat span {
@@ -200,10 +185,7 @@ input::placeholder {
     grid-column: 2;
     white-space: nowrap;
     font-family: 'Poppins', sans-serif;
->>>>>>> 3c0803e6cd2f2f37d33b425c61db8a9e2371a832
 }
-
-
 
 .weather__body {
   text-align: center;
