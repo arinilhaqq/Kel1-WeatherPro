@@ -142,8 +142,6 @@ input::placeholder {
     font-family: 'Poppins', sans-serif;
 }
 
-
-
 .weather__body {
   text-align: center;
   margin-top: 3rem;
@@ -212,7 +210,7 @@ input::placeholder {
   padding-left: 1rem;
 }
 
-/* .weather__sunrisesunset {
+.weather__sunrisesunset {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -227,7 +225,7 @@ input::placeholder {
 
 .weather__sunrisesunset i {
     margin-left: 0.5rem;
-} */
+}
 
 
 .weather__info {

@@ -2,8 +2,8 @@
 let currCity = "Jakarta";
 let units = "metric";
 let isLonglat = false;
-
 let intervalId;
+let weatherDataFound = true;
 
 // Selectors
 let city = document.querySelector(".weather__city");
@@ -12,8 +12,8 @@ let weather__forecast = document.querySelector('.weather__forecast');
 let weather__temperature = document.querySelector(".weather__temperature");
 let weather__icon = document.querySelector(".weather__icon");
 let weather__minmax = document.querySelector(".weather__minmax")
-// let weather__sunrise = document.querySelector(".sunrise")
-// let weather__sunset = document.querySelector(".sunset")
+let weather__sunrise = document.querySelector(".sunrise")
+let weather__sunset = document.querySelector(".sunset")
 let weather__realfeel = document.querySelector('.weather__realfeel');
 let weather__humidity = document.querySelector('.weather__humidity');
 let weather__wind = document.querySelector('.weather__wind');
@@ -46,12 +46,19 @@ function getLatitudeLongitude() {
 function getWeatherByCity(city) {
     const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`)
-        .then(res => res.json())
-        .then(data => {
-            displayWeather(data);
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
         })
         .catch(error => {
             console.error("Error fetching weather data:", error);
+            weatherDataFound = false; 
+        })
+        .then(data => {
+            displayWeather(data);
+            weatherDataFound = true;
         });
 }
 
@@ -70,32 +77,48 @@ function getWeatherByCoordinates(latitude, longitude) {
 
 // Display weather data
 function displayWeather(data) {
-    // Update DOM elements with weather data
-    city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`;
-    updateDateTime(Date.now() / 1000, data.timezone); // Use current timestamp instead of data.dt
-    weather__forecast.innerHTML = `<p>${data.weather[0].main}</p>`;
-    weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176;`;
-    weather__icon.innerHTML = `<img src="${data.weather[0].main}.png" />`;
-    weather__minmax.innerHTML = `<p>Min: ${data.main.temp_min.toFixed()}&#176;</p><p>Max: ${data.main.temp_max.toFixed()}&#176;</p>`;
-    // convertSunriseSunset(data.sys.sunrise, data.sys.sunset);
-    weather__realfeel.innerHTML = `${data.main.feels_like.toFixed()}&#176;`;
-    weather__humidity.innerHTML = `${data.main.humidity}%`;
-    weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph" : "m/s"}`;
-    weather__pressure.innerHTML = `${data.main.pressure} hPa`;
-  
-    clearInterval(intervalId);
-    intervalId = setInterval(function () {
-      updateDateTime(Date.now() / 1000, data.timezone); // Update with current timestamp
-    }, 1000);
+    if (weatherDataFound) {
+        // Update DOM elements with weather data
+        city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`;
+        updateDateTime(Date.now() / 1000, data.timezone); // Use current timestamp instead of data.dt
+        weather__forecast.innerHTML = `<p>${data.weather[0].main}</p>`;
+        weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176;`;
+        weather__icon.innerHTML = `<img src="${data.weather[0].main}.png" />`;
+        weather__minmax.innerHTML = `<p>Min: ${data.main.temp_min.toFixed()}&#176;</p><p>Max: ${data.main.temp_max.toFixed()}&#176;</p>`;
+        convertSunriseSunset(data.sys.sunrise, data.sys.sunset);
+        weather__realfeel.innerHTML = `${data.main.feels_like.toFixed()}&#176;`;
+        weather__humidity.innerHTML = `${data.main.humidity}%`;
+        weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph" : "m/s"}`;
+        weather__pressure.innerHTML = `${data.main.pressure} hPa`;
+    
+        clearInterval(intervalId);
+        intervalId = setInterval(function () {
+        updateDateTime(Date.now() / 1000, data.timezone); // Update with current timestamp
+        }, 1000);
 
-    if (units == "metric") {
-        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffc200";
-        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffffff";
-    } else{
-        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffffff";
-        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffc200";
+        if (units == "metric") {
+            document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffc200";
+            document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffffff";
+        } else{
+            document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffffff";
+            document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffc200";
+        }
+    } else {
+        city.innerHTML = "City not found";
+        datetime.innerHTML = "";
+        weather__forecast.innerHTML = "";
+        weather__temperature.innerHTML = "";
+        weather__icon.innerHTML = "";
+        weather__minmax.innerHTML = "";
+        weather__sunrise.innerHTML = "";
+        weather__sunset.innerHTML = "";
+        weather__realfeel.innerHTML = "";
+        weather__humidity.innerHTML = "";
+        weather__wind.innerHTML = "";
+        weather__pressure.innerHTML = "";
+        weatherDataFound = true; 
     }
-  }
+}
   
 
 // Convert country code to name
@@ -127,17 +150,17 @@ function updateDateTime(timestamp, timezone) {
     datetime.innerHTML = formattedDate;
 }
 
-// function convertSunriseSunset(sr, ss) {
-//     let sunrise = new Date(sr * 1000);
-//     let sunset = new Date(ss * 1000);
-//     const options = {
-//         hour: "numeric",
-//         minute: "numeric",
-//         hour12: false,
-//     };
-//     weather__sunrise.innerHTML = `Sunrise: ${sunrise.toLocaleString("en-US", options)}`;
-//     weather__sunset.innerHTML = `Sunset: ${sunset.toLocaleString("en-US", options)}`;
-// }
+function convertSunriseSunset(sr, ss) {
+    let sunrise = new Date(sr * 1000);
+    let sunset = new Date(ss * 1000);
+    const options = {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: false,
+    };
+    weather__sunrise.innerHTML = `Sunrise: ${sunrise.toLocaleString("en-US", options)}`;
+    weather__sunset.innerHTML = `Sunset: ${sunset.toLocaleString("en-US", options)}`;
+}
   
 
 // Search form submission event
@@ -147,14 +170,18 @@ document.querySelector(".weather__search").addEventListener('submit', e => {
     e.preventDefault();
     // Change current city
     currCity = search.value;
+    // Clear form
+    search.value = "";
     // Get weather forecast by city name
     clearInterval(intervalId);
     intervalId = setInterval(() => {
-        getWeatherByCity(currCity);
-        getForecast();
+        if (weatherDataFound) {
+            getWeatherByCity(currCity);
+            getForecast();
+        } else {
+            clearInterval(intervalId);
+        }
     }, 1000);
-    // Clear form
-    search.value = "";
 });
 
 document.querySelector(".weather__longlat").addEventListener("click", () => {
@@ -201,7 +228,15 @@ function getForecast() {
         document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
       }
     })
-    .catch(err => alert("Something Went Wrong: Try Checking Your Internet Connection"));
+    .catch(err => {
+        console.error("Error fetching forecast data:", err);
+        for (let i = 0; i < 5; i++) {
+            document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: No Data";
+            document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: No Data";
+            document.getElementById("img" + (i + 1)).src = "Logo.png";
+            document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
+          }
+    });
 }
 
 // Getting and displaying the text for the upcoming five days of the week
