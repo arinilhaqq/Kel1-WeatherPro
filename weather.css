@@ -90,6 +90,7 @@ body {
 input {
   border: none;
   background: #fffdfd;
+  outline: none;
   color: rgb(0, 0, 0);
   padding: 0.5rem 2.5rem;
   border-radius: 15px;
@@ -120,25 +121,6 @@ input::placeholder {
   color: rgb(7, 79, 94);
 }
 
-.weather_searchform{
-  font-family: 'Poppins', sans-serif;
-}
-
-.weather__longlat {
-  background-color: #f9f9f9;
-  padding: 0.6rem 4rem;
-  border-radius: 20px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  outline-color: transparent;
-}
-
-.weather__searchform {
-    font-family: 'Poppins', sans-serif;
-}
 
 .weather__longlat {
     background-color: #f9f9f9;
