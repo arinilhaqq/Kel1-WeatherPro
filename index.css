@@ -26,84 +26,95 @@ body {
 
 .navbar-container {
   display: flex;
+  flex-wrap: wrap;
   background-color: #ffffff;
   margin: auto;
-  /* justify-content:space-between; */
+  width: 100%;
 }
 
 .logo img {
-  /* float: left; */
   margin-top: 20px;
   width: 70px;
   padding-left: 50px;
 }
 
-.navbar-container > .web-title {
+.navbar-container>.web-title {
   text-decoration: none;
   color: #3389d8;
-  /* padding-left: 20px; */
   font-size: 25px;
   font-weight: bold;
 }
 
-.navbar-container > .menu {
-  padding-right: 30px;
-  padding-left: 750px;
+.navbar-container>.menu {
+  margin-left: auto;
+  padding-left: 65px;
+  padding-right: 5%;
+  float: right;
+  width: 38%;
   display: flex;
-  margin: auto 0;
-  gap: 50px;
+  gap: 40px;
   font-size: 15px;
   font-weight: bold;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.navbar-container > .menu > a {
+.navbar-container>.menu>a {
   text-decoration: none;
   color: #3389d8;
   text-shadow: #555;
 }
 
 .content {
-  /* margin: 55px;
-  margin-top: 10px; */
-  padding-left: 55px;
   color: #ffffff;
 }
 
 .intro-website {
-  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 40px;
   color: #ffffff;
   font-weight: 0;
-  width: 600px;
+  width: 100%;
   margin: 0px;
 }
 
-.text {
-  padding-top: 140px;
-  width: 700px;
-  font-size: 20px;
-  text-align: justify;
+.h1 {
+  padding-left: 55px;
+  width: 650px;
 }
 
 .deskripsi {
-  margin-top: -190px;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  margin-top: -190px;
   justify-content: space-between;
-  width: 1130px;
+  width: 100%;
+  align-items: center;
+}
+
+.h2 {
+  padding-left: 55px;
+  padding-top: 140px;
+  text-align: justify;
+  width: 650px;
+}
+
+.image-flex {
+  width: 250px;
+  margin-right: 250px;
 }
 
 .button{
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  margin-top: -170px;
+  margin-top: -150px;
 }
 
 button {
+  margin-left: 55px;
   font-size: 30px;
   font-weight: bold;
   color: #ffffff;
@@ -115,6 +126,20 @@ button {
   cursor: pointer;
   display: inline-block;
   width: 200px;
+}
+
+.image2-flex {
+  width: 490px;
+  height: 390px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.image2-flex img {
+  width: 490px;
+  height: 390px;
+  bottom: 0px;
+  right: 0px;
 }
 
 button:hover{
