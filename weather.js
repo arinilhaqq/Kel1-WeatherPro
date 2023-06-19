@@ -28,17 +28,20 @@ function getLatitudeLongitude() {
             const longitude = position.coords.longitude;
             // Call weather API with obtained coordinates
             getWeatherByCoordinates(latitude, longitude);
+            getForecastByCoordinate(latitude, longitude);
         },
         function (error) {
             console.error("Error getting location:", error);
             // Fall back to default city if geolocation fails
             getWeatherByCity(currCity);
+            getForecast();
         }
         );
     } else {
         console.error("Geolocation is not supported by this browser.");
         // Fall back to default city if geolocation is not supported
         getWeatherByCity(currCity);
+        getForecast();
     }
 }
 
@@ -221,22 +224,43 @@ function getForecast() {
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${currCity}&appid=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
-      for (let i = 0; i < 5; i++) {
+        displayDataForecaset(data);
+    })
+    .catch(err => {
+        console.error("Error fetching forecast data:", err);
+        displayDataErrorForecast();
+    });
+}
+
+function getForecastByCoordinate(latitude, longitude) {
+    const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`)
+      .then(response => response.json())
+      .then(data => {
+          displayDataForecaset(data);
+      })
+      .catch(err => {
+          console.error("Error fetching forecast data:", err);
+          displayDataErrorForecast();
+      });
+}
+
+function displayDataForecaset(data) {
+    for (let i = 0; i < 5; i++) {
         document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1) + "°";
         document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°";
         document.getElementById("img" + (i + 1)).src = data.list[i].weather[0].main + ".png";
         document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
-      }
-    })
-    .catch(err => {
-        console.error("Error fetching forecast data:", err);
-        for (let i = 0; i < 5; i++) {
-            document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: No Data";
-            document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: No Data";
-            document.getElementById("img" + (i + 1)).src = "Logo.png";
-            document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
-          }
-    });
+    }
+}
+
+function displayDataErrorForecast() {
+    for (let i = 0; i < 5; i++) {
+        document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: No Data";
+        document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: No Data";
+        document.getElementById("img" + (i + 1)).src = "Logo.png";
+        document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
+    }
 }
 
 // Getting and displaying the text for the upcoming five days of the week
