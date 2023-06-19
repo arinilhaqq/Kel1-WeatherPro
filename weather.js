@@ -1,10 +1,7 @@
-// State
 let currCity = "Jakarta";
 let units = "metric";
 let isLonglat = false;
 
-
-// Selectors
 let city = document.querySelector(".weather__city");
 let datetime = document.querySelector(".weather__datetime");
 let weather__forecast = document.querySelector('.weather__forecast');
@@ -16,30 +13,25 @@ let weather__humidity = document.querySelector('.weather__humidity');
 let weather__wind = document.querySelector('.weather__wind');
 let weather__pressure = document.querySelector('.weather__pressure');
 
-// Get latitude and longitude
 function getLatitudeLongitude() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
-                // Call weather API with obtained coordinates
                 getWeatherByCoordinates(latitude, longitude);
             },
             function (error) {
                 console.error("Error getting location:", error);
-                // Fall back to default city if geolocation fails
                 getWeatherByCity(currCity);
             }
         );
     } else {
         console.error("Geolocation is not supported by this browser.");
-        // Fall back to default city if geolocation is not supported
         getWeatherByCity(currCity);
     }
 }
 
-// Get weather by city name
 function getWeatherByCity(city) {
     const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`)
@@ -52,7 +44,6 @@ function getWeatherByCity(city) {
         });
 }
 
-// Get weather by coordinates
 function getWeatherByCoordinates(latitude, longitude) {
     const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}`)
@@ -65,33 +56,40 @@ function getWeatherByCoordinates(latitude, longitude) {
         });
 }
 
-// Display weather data
 function displayWeather(data) {
-    // Update DOM elements with weather data
     city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`
-    datetime.innerHTML = convertTimeStamp(data.dt, data.timezone);
-    weather__forecast.innerHTML = `<p>${data.weather[0].main}`
-    weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176`
-    weather__icon.innerHTML = `   <img src="${data.weather[0].main}.png" />`
-    weather__minmax.innerHTML = `<p>Min: ${data.main.temp_min.toFixed()}&#176</p><p>Max: ${data.main.temp_max.toFixed()}&#176</p>`
-    weather__realfeel.innerHTML = `${data.main.feels_like.toFixed()}&#176`
-    weather__humidity.innerHTML = `${data.main.humidity}%`
-    weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph" : "m/s"}`
-    weather__pressure.innerHTML = `${data.main.pressure} hPa`
+    updateDateTime(Date.now()/1000, data.timezone); // pake timestamp
+    weather__forecast.innerHTML = `<p>${data.weather[0].main}</p>`;
+    weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176`;
+    weather__icon.innerHTML = `   <img src="${data.weather[0].main}.png" />`;
+    weather__minmax.innerHTML = `<p>Min: ${data.main.temp_min.toFixed()}&#176</p><p>Max: ${data.main.temp_max.toFixed()}&#176</p>`;
+    weather__realfeel.innerHTML = `${data.main.feels_like.toFixed()}&#176;`;
+    weather__humidity.innerHTML = `${data.main.humidity}%`;
+    weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph" : "m/s"}`;
+    weather__pressure.innerHTML = `${data.main.pressure} hPa`;
+
+    clearInterval(intervalId);
+    intervalId=setInterval(function(){
+      updateDateTime(Date.now()/1000, data.timezone);
+    }, 1000);
+
+    if (units == "metric"){
+        document.querySelector(".weather_unit_celcius").style.backgroundColor = "ffc200";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffffff";
+    } else{
+        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffffff";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#ffc200";
+    }
 }
 
-// Convert country code to name
 function convertCountryCode(country) {
     let regionNames = new Intl.DisplayNames(["en"], { type: "region" });
     return regionNames.of(country)
 }
 
-// Convert timestamp to formatted date and time
 function convertTimeStamp(timestamp, timezone){
-     const convertTimezone = timezone / 3600; // convert seconds to hours 
-
     const date = new Date(timestamp * 1000);
-    
+    const convertTimezone = timezone / 3600; 
     const options = {
         weekday: "long",
         day: "numeric",
@@ -99,106 +97,89 @@ function convertTimeStamp(timestamp, timezone){
         year: "numeric",
         hour: "numeric",
         minute: "numeric",
+        second: "numeric",
         timeZone: `Etc/GMT${convertTimezone >= 0 ? "-" : "+"}${Math.abs(convertTimezone)}`,
-        hour12: true,
-    }
-    return date.toLocaleString("en-US", options)
-   
+        hour12: false,
+    };
+    return date.toLocaleString("en-US", options);
 }
 
-// Search form submission event
+function updateDateTime(timestamp, timezone){
+    const formattedDate = convertTimeStamp(timestamp, timezone);
+    datetime.innerHTML = formattedDate;
+}
+
+
 document.querySelector(".weather__search").addEventListener('submit', e => {
     let search = document.querySelector(".weather__searchform");
-    // Prevent default action
     e.preventDefault();
-    // Change current city
     currCity = search.value;
-    // Get weather forecast by city name
-    getWeatherByCity(currCity);
-    GetInfo()
-    // Clear form
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+        getWeatherByCity(currCity);
+        getForecast();
+    }, 1000);
     search.value = "";
-})
+});
 
 document.querySelector(".weather__longlat").addEventListener("click", () => {
-    // Add your code here to handle the button click event
-    // This code will be executed when the button is clicked
     isLonglat = true;
     getLatitudeLongitude();
-    console.log("Button clicked!");
   });
 
-// Units selection events
 document.querySelector(".weather_unit_celsius").addEventListener('click', () => {
     if (units !== "metric") {
-        // Change to metric
         units = "metric";
-        // Get weather forecast
         if (isLonglat) {
             getLatitudeLongitude()
         } else {
         getWeatherByCity(currCity);
         }
+        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffc200";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#FFFFFF";
     }
-})
+});
 
 document.querySelector(".weather_unit_farenheit").addEventListener('click', () => {
     if (units !== "imperial") {
-        // Change to imperial
         units = "imperial";
-        // Get weather forecast
         if (isLonglat) {
             getLatitudeLongitude()
         } else {
         getWeatherByCity(currCity);
         }
+        document.querySelector(".weather_unit_celsius").style.backgroundColor = "#ffc200";
+        document.querySelector(".weather_unit_farenheit").style.backgroundColor = "#FFFFFF";
     }
-})
+});
 
 
-function GetInfo() {
-    // var newName = document.getElementsByClassName("weather__searchform");
-    // var cityName = document.getElementById("cityName");
-    // cityName.innerHTML = "--" + newName.value + "--";
-    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' +  currCity + '&appid=86d88fac1164d4c3472d6e3666cf131f')
+function getForecast() {
+    const API_KEY = '86d88fac1164d4c3472d6e3666cf131f';
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${currCity}&appid=${API_KEY}`)
       .then(response => response.json())
       .then(data => {
-        // Getting the min and max values for each day /273.15
         for (i = 0; i < 5; i++) {
-        document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min -273).toFixed(1) + "°";
-        document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max -273).toFixed(2) + "°";
+        document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min -273.15).toFixed(1) + "°";
+        document.getElementById("day" + (i + 1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max -273.15).toFixed(2) + "°";
         document.getElementById("img" + (i + 1)).src = data.list[i].weather[0].main + ".png"; 
         document.getElementById("day" + (i + 1)).innerHTML = weekday[CheckDay(i)];
         }
       })
       .catch(err => alert("Something Went Wrong: Try Checking Your Internet Connection"));
   }
-  
-  function DefaultScreen() {
-    GetInfo();
-  }
-  
-  // Rest of the code...
-  
-//Getting and displaying the text for the upcoming five days of the week
-var d = new Date();
-var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
 
-//Function to get the correct integer for the index of the days array
+const d = new Date();
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
+
 function CheckDay(day){
-    if(day + d.getDay() > 6){
-        return day + d.getDay() - 7;
+    if(d.getDay()+day + 1> 6){
+        return (d.getDay()+day+1) - 7;
     }
     else{
-        return day + d.getDay();
+        return (d.getDay()+day+1);
     }
 }
 
-for(i = 0; i<5; i++){
-    document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)];
-}
-//------------------------------------------------------------
-
-
-
-document.body.addEventListener('load', getWeatherByCity(currCity), DefaultScreen())
+getWeatherByCity(currCity);
+getForecast();

@@ -1,4 +1,4 @@
-@import url(https://www.cdnfonts.com/inter.font);
+@import url(https://www.cdnfonts.com/css/Poppins);
 
 body {
   font-family: "inter", sans-serif;
@@ -6,7 +6,6 @@ body {
 }
 
 .container-member {
-  /* background-color: #3389D8; */
   background-image: linear-gradient(
     50deg,
     hsl(209deg 88% 32%) 0%,
@@ -27,13 +26,13 @@ body {
 
 .navbar-container {
   display: flex;
+  flex-wrap: wrap;
   background-color: #ffffff;
   margin: auto;
-  /* justify-content:space-between; */
+  width: 100%;
 }
 
 .logo img {
-  /* float: left; */
   margin-top: 20px;
   width: 70px;
   padding-left: 50px;
@@ -42,22 +41,22 @@ body {
 .navbar-container>.web-title {
   text-decoration: none;
   color: #3389d8;
-  /* padding-left: 20px; */
   font-size: 25px;
   font-weight: bold;
 }
 
 .navbar-container>.menu {
-  padding-right: 30px;
-  padding-left: 750px;
+  margin-left: auto;
+  padding-left: 65px;
+  padding-right: 5%;
+  float: right;
+  width: 38%;
   display: flex;
-  margin: auto 0;
-  gap: 50px;
+  gap: 40px;
   font-size: 15px;
   font-weight: bold;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-
 }
 
 .navbar-container>.menu>a {
@@ -100,8 +99,6 @@ img {
 }
 
 .grid > article img {
-  /* border-top-left-radius: 5px;
-    border-top-right-radius: 5px; */
   padding-left: 12px;
   padding-top: 15px;
   width: 200px;
@@ -144,4 +141,9 @@ img {
   background-color: #ffc200;
   color: white;
   padding: 20px;
+}
+
+.copyright{
+  padding-left: 55px;
+  padding-bottom: 10px;
 }
