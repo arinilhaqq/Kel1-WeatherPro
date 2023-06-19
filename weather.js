@@ -12,6 +12,8 @@ let weather__forecast = document.querySelector('.weather__forecast');
 let weather__temperature = document.querySelector(".weather__temperature");
 let weather__icon = document.querySelector(".weather__icon");
 let weather__minmax = document.querySelector(".weather__minmax")
+// let weather__sunrise = document.querySelector(".sunrise")
+// let weather__sunset = document.querySelector(".sunset")
 let weather__realfeel = document.querySelector('.weather__realfeel');
 let weather__humidity = document.querySelector('.weather__humidity');
 let weather__wind = document.querySelector('.weather__wind');
@@ -75,6 +77,7 @@ function displayWeather(data) {
     weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176;`;
     weather__icon.innerHTML = `<img src="${data.weather[0].main}.png" />`;
     weather__minmax.innerHTML = `<p>Min: ${data.main.temp_min.toFixed()}&#176;</p><p>Max: ${data.main.temp_max.toFixed()}&#176;</p>`;
+    // convertSunriseSunset(data.sys.sunrise, data.sys.sunset);
     weather__realfeel.innerHTML = `${data.main.feels_like.toFixed()}&#176;`;
     weather__humidity.innerHTML = `${data.main.humidity}%`;
     weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph" : "m/s"}`;
@@ -123,6 +126,18 @@ function updateDateTime(timestamp, timezone) {
     const formattedDate = convertTimeStamp(timestamp, timezone);
     datetime.innerHTML = formattedDate;
 }
+
+// function convertSunriseSunset(sr, ss) {
+//     let sunrise = new Date(sr * 1000);
+//     let sunset = new Date(ss * 1000);
+//     const options = {
+//         hour: "numeric",
+//         minute: "numeric",
+//         hour12: false,
+//     };
+//     weather__sunrise.innerHTML = `Sunrise: ${sunrise.toLocaleString("en-US", options)}`;
+//     weather__sunset.innerHTML = `Sunset: ${sunset.toLocaleString("en-US", options)}`;
+// }
   
 
 // Search form submission event
