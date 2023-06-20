@@ -160,6 +160,7 @@ img {
   text-align: end;
 }
 
+/* For small desktop responsive */
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;
@@ -219,6 +220,7 @@ img {
   }
 }
 
+/* For smartphone responsive */
 @media (max-width: 480px) {
   .grid {
     display: grid;
