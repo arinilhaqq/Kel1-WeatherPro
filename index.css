@@ -309,8 +309,10 @@ button:hover{
   }
 
   .image2-flex {
-    max-width: 70%;
-    max-height: none;
-    margin-bottom: 0;
+    max-width: 80%;
+    height: 390px;
+    bottom: 0px;
+    right: 0px;
+    overflow: hidden;
   }
 }
