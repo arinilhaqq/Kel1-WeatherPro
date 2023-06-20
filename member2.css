@@ -159,3 +159,108 @@ img {
   font-size: 10px;
   text-align: end;
 }
+
+/* For small desktop responsive */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo img {
+    margin-top: 20px;
+    width: 70px;
+    padding-left: 0;
+  }
+
+  .navbar-container > .web-title,
+  .navbar-container > .menu {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .navbar-container > .menu {
+    padding: 0;
+  }
+  
+  .menu a.active {
+    padding: 10px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  .grid > article {
+    width: 100%;
+  }
+  
+  .grid > article img {
+    padding-top: 15px;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .grid h2 {
+    font-size: 20px;
+  }
+  
+  .grid p {
+    font-size: 12px;
+  }
+  
+  .grid button {
+    width: 80%;
+  }
+  
+  .bawah p {
+    text-align: center;
+  }
+}
+
+/* For smartphone responsive */
+@media (max-width: 480px) {
+  .menu a.active {
+    padding: 10px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  .grid > article {
+    width: 100%;
+  }
+  
+  .grid > article img {
+    padding-top: 15px;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .grid h2 {
+    font-size: 20px;
+  }
+  
+  .grid p {
+    font-size: 12px;
+  }
+  
+  .grid button {
+    width: 80%;
+  }
+  
+  .bawah p {
+    text-align: center;
+  }
+}
+

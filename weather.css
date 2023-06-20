@@ -227,7 +227,6 @@ input::placeholder {
     margin-left: 0.5rem;
 }
 
-
 .weather__info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -317,8 +316,6 @@ input::placeholder {
 .air_pollution_card p {
     font-size: 15px;
 }
-  
-  
 
 .forecastContainer {
     display: flex;
@@ -381,4 +378,217 @@ input::placeholder {
   border-radius: 50px;
   margin-left: 42.5%;
   width: 15%;
+}
+
+/* For small desktop responsive */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .logo img {
+      margin-top: 20px;
+      width: 70px;
+      padding-left: 0;
+    }
+  
+    .navbar-container > .web-title,
+    .navbar-container > .menu {
+      margin: 20px 0;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  
+    .navbar-container > .menu {
+      padding: 0;
+    }
+  
+    .weather__search {
+      justify-content: center;
+    }
+  
+    input {
+      width: 80%;
+    }
+  
+    .weather__longlat {
+      margin-left: 20px;
+      width: 30%;
+    }
+
+    .sub_heading {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 14px;
+      width: 70%;
+    }
+
+    .weather__info {
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      width: 90%;
+    }
+
+    .air_info {
+      margin-left: 30%;
+      margin-right: 20%;
+      width: 40%;
+    }
+
+    .sub_heading1 {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 14px;
+      width: 70%;
+    }
+
+    .air_pollution_Info {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+      width: 90%;
+    }
+
+    .air_pollution_card {
+      display: block;
+      width: 80%;
+      margin-bottom: 10px;
+      /* margin-right: 10px; */
+    }
+
+    .air_pollution_card img {
+        width: 50px; 
+    }
+  
+    .forecastContainer .forecast {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    
+    .forecastIcons .icons {
+        margin: 0 5px;
+        padding: 5px;
+        width: calc(50% - 20px);
+    }
+    
+    .image .imgClass {
+      width: 80%;
+      height: auto;
+    }
+  
+    .menu a.active {
+      padding: 10px;
+    }
+}
+
+/* For smartphone responsive*/
+@media screen and (max-width: 480px) {
+  .navbar-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo img {
+    margin-top: 20px;
+    width: 70px;
+    padding-left: 0;
+  }
+
+  .navbar-container > .web-title,
+  .navbar-container > .menu {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .navbar-container > .menu {
+    padding: 0;
+  }
+
+  .weather__search {
+    justify-content: center;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  input::placeholder {
+    font-size: 9px;
+  }
+
+  .weather__longlat {
+    margin-left: 20px;
+    width: 40%;
+    font-size: 10px;
+  }
+
+  .weather__longlat i {
+    font-size: 13px;
+  }
+
+  .sub_heading,
+  .sub_heading1 {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    width: 70%;
+  }
+
+  .air_info {
+    margin-left: 30%;
+    margin-right: 20%;
+    width: 40%;
+  }
+
+  .weather__info,
+  .air_pollution_Info {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    width: 90%;
+  }
+
+  .weather__card {
+    display: block;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+
+  .air_pollution_Info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .air_pollution_card {
+    width: 80%;
+  }
+
+  .air_pollution_card img {
+    width: 50px;
+  }
+
+  .forecastContainer .forecast {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .forecastIcons .icons {
+    margin: 0 5px;
+    padding: 5px;
+    width: calc(50% - 20px);
+  }
+
+  .image .imgClass {
+    width: 80%;
+    height: auto;
+  }
+
+  .menu a.active {
+    padding: 10px;
+  }
 }
