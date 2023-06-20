@@ -268,6 +268,58 @@ input::placeholder {
     color: #ffffff;
 }
 
+.sub_heading {
+    border: 2px solid white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 17px;
+    color: white;
+    margin-top: 50px;
+    margin-left: 40%;
+    width: 20%;
+}
+  
+.sub_heading1 {
+    border: 2px solid white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 17px;
+    color: white;
+    margin-top: 40px;
+    margin-left: 35%;
+    width: 30%;
+}
+  
+.air_pollution_Info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 5%;
+    justify-content: center;
+    width: 90%;
+}
+  
+.air_pollution_card {
+    display: flex;
+    align-items: center;
+    background: #fff9f9;
+    padding: 1rem;
+    border-radius: 30px;
+}
+  
+.air_pollution_card img {
+    font-size: 1rem;
+    width: 50px;
+}
+  
+.air_pollution_card p {
+    font-size: 15px;
+}
+  
+  
+
 .forecastContainer {
     display: flex;
     flex-wrap: wrap;
@@ -330,54 +382,3 @@ input::placeholder {
   margin-left: 42.5%;
   width: 15%;
 }
-
-.sub_heading {
-  border: 2px solid white;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 17px;
-  color: white;
-  margin-top: 50px;
-  margin-left: 40%;
-  width: 20%;
-}
-
-.sub_heading1 {
-  border: 2px solid white;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 17px;
-  color: white;
-  margin-top: 40px;
-  margin-left: 35%;
-  width: 30%;
-}
-
-.air_pollution_Info {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
-  justify-content: center;
-  margin-top: 2rem;
-  margin-left: 5%;
-  justify-content: center;
-  width: 90%;
-}
-
-.air_pollution_card {
-  display: flex;
-  align-items: center;
-  background: #fff9f9;
-  padding: 1rem;
-  border-radius: 30px;
-}
-
-.air_pollution_card img {
-    font-size: 1rem;
-    width: 50px;
-}
-
-.air_pollution_card p {
-  font-size: 15px;
-}
-

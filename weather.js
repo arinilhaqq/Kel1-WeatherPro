@@ -100,7 +100,7 @@ function displayWeather(data) {
     
         clearInterval(intervalId);
         intervalId = setInterval(function () {
-        updateDateTime(Date.now() / 1000, data.timezone); // Update with current timestamp
+            updateDateTime(Date.now() / 1000, data.timezone); // Update with current timestamp
         }, 1000);
 
         if (units == "metric") {
@@ -322,7 +322,7 @@ function setComponentsOfAirNotFound() {
 	air_quality_status.style.color = "rgb(0, 0, 0)";
     components_value_all.forEach(component => {
         component.innerText = "";
-    });
+    }); 
 }
 
 function getForecast() {
