@@ -317,8 +317,6 @@ input::placeholder {
 .air_pollution_card p {
     font-size: 15px;
 }
-  
-  
 
 .forecastContainer {
     display: flex;
@@ -382,3 +380,108 @@ input::placeholder {
   margin-left: 42.5%;
   width: 15%;
 }
+
+/* Media query for screens with a maximum width of 768px */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .logo img {
+      margin-top: 20px;
+      width: 70px;
+      padding-left: 0;
+    }
+  
+    .navbar-container > .web-title,
+    .navbar-container > .menu {
+      margin: 20px 0;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  
+    .navbar-container > .menu {
+      padding: 0;
+    }
+  
+    .weather__search {
+      justify-content: center;
+    }
+  
+    input {
+      width: 100%;
+    }
+  
+    .weather__longlat {
+      margin-left: 20px;
+      width: 30%;
+    }
+
+    .sub_heading {
+      font-size: 14px;
+    }
+
+    .weather__info {
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      width: 90%;
+    }
+
+    .air_info {
+      display: flex;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: 70%;
+    }
+
+    .sub_heading1 {
+      font-size: 14px;
+    }
+
+    .air_pollution_Info {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+      width: 90%;
+    }
+
+    .air_pollution_card {
+        padding: 10px;
+        width: 80%;
+    }
+
+    .air_pollution_card img {
+        width: 50px; 
+    }
+  
+    .forecastContainer .forecast {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    
+    .forecastIcons .icons {
+        margin: 0 5px;
+        padding: 5px;
+        width: calc(50% - 20px);
+    }
+    
+    .image .imgClass {
+      width: 80%;
+      height: auto;
+    }
+  
+    .menu a.active {
+      padding: 10px;
+    }
+  
+    .air_info {
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 70%;
+    }
+}
+  
