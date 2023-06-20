@@ -152,3 +152,84 @@ button:hover{
   padding: 20px;
   border-radius: 5px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo img {
+    margin-top: 20px;
+    width: 70px;
+    padding-left: 0;
+  }
+
+  .navbar-container > .web-title,
+  .navbar-container > .menu {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .navbar-container > .menu {
+    padding: 0;
+  }
+
+  .intro-website {
+    font-size: 30px;
+  }
+
+  .h1 {
+    font-size: 30px;
+    max-width: 100%;
+    padding: 20px;
+    margin-bottom: 60px;
+  }
+
+  .h2 {
+    font-size: 20px;
+    max-width: 80%;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .deskripsi {
+    margin-top: -120px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-flex {
+    margin: 0 auto;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .h2 {
+    padding-top: 40px;
+    text-align: center;
+    padding-left: 0;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .button {
+    justify-content: center;
+  }
+
+  button {
+    margin-left: 0;
+    margin-top: 40px;
+    width: 250px;
+  }
+
+  .image2-flex {
+    max-width: 70%;
+    max-height: none;
+    margin-bottom: 0;
+  }
+}
