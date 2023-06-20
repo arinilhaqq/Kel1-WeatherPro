@@ -123,6 +123,7 @@ function displayWeather(data) {
         weather__humidity.innerHTML = "";
         weather__wind.innerHTML = "";
         weather__pressure.innerHTML = "";
+        setComponentsOfAirNotFound();
         weatherDataFound = true; 
     }
 }
@@ -187,9 +188,10 @@ document.querySelector(".weather__search").addEventListener('submit', e => {
             .then(coordinates => {
                 if (coordinates) {
                     getAirQuality(coordinates.latitude, coordinates.longitude);
-                    console.log("masuk")
                 } else {
-                    console.log('Coordinates not found.');
+                    console.log('Coordinates not found');
+                    clearInterval(intervalId);
+                    setComponentsOfAirNotFound();
                 }
             });
             getForecast();
@@ -247,8 +249,9 @@ async function getCoordinatesFromCity(city) {
         throw new Error('No results found');
       }
     } catch (error) {
-      console.error('Error:', error);
-      return null;
+      console.error('Error get coordinates from city:', error);
+    //   weatherDataFound = false; 
+      setComponentsOfAirNotFound();
     }
   }
 
@@ -257,11 +260,12 @@ function getAirQuality(latitude, longitude) {
     fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
-        setValuesOfAir(data)
-        setComponentsOfAir(data)
+        setValuesOfAir(data);
+        setComponentsOfAir(data);
     })
     .catch(err => {
         console.error("Error fetching air quality data:", err);
+        setComponentsOfAirNotFound();
     });
 }
 
@@ -295,7 +299,7 @@ function setValuesOfAir(data) {
             break;
         default:
             status = "Unknown";
-            color = "rgb(0, 0, 0)"; // Default color when AQI is unknown
+            color = "rgb(0, 0, 0)";
     }
 
     air_quality_status.innerHTML = status;
@@ -310,7 +314,15 @@ function setComponentsOfAir(data) {
         const value = components[attr] || 0; // Default 0 if the component is not available
         component.innerText = `${value} μg/m³`;
     });
-      
+}
+
+function setComponentsOfAirNotFound() {
+    air_quality.innerHTML = "No Data";
+    air_quality_status.innerHTML = "No Data";
+	air_quality_status.style.color = "rgb(0, 0, 0)";
+    components_value_all.forEach(component => {
+        component.innerText = "";
+    });
 }
 
 function getForecast() {
@@ -375,7 +387,6 @@ getCoordinatesFromCity(currCity)
 .then(coordinates => {
     if (coordinates) {
         getAirQuality(coordinates.latitude, coordinates.longitude);
-        console.log("masuk")
     } else {
         console.log('Coordinates not found.');
     }
