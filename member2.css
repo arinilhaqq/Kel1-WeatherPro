@@ -186,6 +186,10 @@ img {
     padding: 0;
   }
   
+  .menu a.active {
+    padding: 10px;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -222,6 +226,10 @@ img {
 
 /* For smartphone responsive */
 @media (max-width: 480px) {
+  .menu a.active {
+    padding: 10px;
+  }
+  
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
