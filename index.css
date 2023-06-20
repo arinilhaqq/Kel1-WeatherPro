@@ -179,6 +179,10 @@ button:hover{
     padding: 0;
   }
 
+  .menu a.active {
+    padding: 10px;
+  }
+
   .intro-website {
     font-size: 30px;
   }
@@ -244,7 +248,7 @@ button:hover{
 
   .logo img {
     margin-top: 20px;
-    width: 70px;
+    width: 50px;
     padding-left: 0;
   }
 
@@ -258,6 +262,10 @@ button:hover{
 
   .navbar-container > .menu {
     padding: 0;
+  }
+
+  .menu a.active {
+    padding: 10px;
   }
 
   .intro-website {
@@ -285,9 +293,9 @@ button:hover{
   }
 
   .image-flex {
-    margin: 0 auto;
-    width: 200px;
-    margin-bottom: 20px;
+    margin: 5px;
+    width: 240px;
+    margin-bottom: 10px;
   }
 
   .h2 {
@@ -309,10 +317,10 @@ button:hover{
   }
 
   .image2-flex {
-    max-width: 80%;
-    height: 390px;
-    bottom: 0px;
-    right: 0px;
+    max-width: 100%;
+    max-height: none;
+    margin-bottom: 0;
+    margin-right: 0;
     overflow: hidden;
   }
 }
