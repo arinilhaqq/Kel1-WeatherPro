@@ -157,6 +157,7 @@ function updateDateTime(timestamp, timezone) {
     datetime.innerHTML = formattedDate;
 }
 
+// Convert  sunrise & sunset data to formatted time and display it
 function convertSunriseSunset(sr, ss) {
     let sunrise = new Date(sr * 1000);
     let sunset = new Date(ss * 1000);
@@ -201,12 +202,12 @@ document.querySelector(".weather__search").addEventListener('submit', e => {
     }, 1000);
 });
 
+// Units selection events
 document.querySelector(".weather__longlat").addEventListener("click", () => {
     isLonglat = true;
     getLatitudeLongitude();
 });
 
-// Units selection events
 document.querySelector(".weather_unit_celsius").addEventListener('click', () => {
   if (units !== "metric") {
     units = "metric";
@@ -233,6 +234,7 @@ document.querySelector(".weather_unit_farenheit").addEventListener('click', () =
   }
 });
 
+// Convert searched city to coordinates
 async function getCoordinatesFromCity(city) {
     const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a'; // Replace with your OpenWeatherMap API key
     const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${API_KEY}`;
@@ -253,8 +255,9 @@ async function getCoordinatesFromCity(city) {
     //   weatherDataFound = false; 
       setComponentsOfAirNotFound();
     }
-  }
+}
 
+// Getting air quality from coordinate
 function getAirQuality(latitude, longitude) {
     const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
     fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`)
@@ -269,6 +272,7 @@ function getAirQuality(latitude, longitude) {
     });
 }
 
+// Setting values of air quality and status
 function setValuesOfAir(data) {
     const aqi = data.list[0].main.aqi;
     let status = "";
@@ -306,6 +310,7 @@ function setValuesOfAir(data) {
 	air_quality_status.style.color = color;
 }
 
+// Setting component of air
 function setComponentsOfAir(data) {
     const components = { ...data.list[0].components };
     
@@ -316,6 +321,7 @@ function setComponentsOfAir(data) {
     });
 }
 
+// Setting component of air if data not found
 function setComponentsOfAirNotFound() {
     air_quality.innerHTML = "No Data";
     air_quality_status.innerHTML = "No Data";
@@ -325,6 +331,7 @@ function setComponentsOfAirNotFound() {
     }); 
 }
 
+// Getting forecast data from searched city
 function getForecast() {
   const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${currCity}&appid=${API_KEY}`)
@@ -338,6 +345,7 @@ function getForecast() {
     });
 }
 
+// Getting forecast data from coordinate
 function getForecastByCoordinate(latitude, longitude) {
     const API_KEY = 'd2c621e47181ff427c2d3fe67c0b877a';
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`)
@@ -351,6 +359,7 @@ function getForecastByCoordinate(latitude, longitude) {
       });
 }
 
+// Display forecast data
 function displayDataForecaset(data) {
     for (let i = 0; i < 5; i++) {
         document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1) + "°";
@@ -360,6 +369,7 @@ function displayDataForecaset(data) {
     }
 }
 
+// Display forecast data if data not found
 function displayDataErrorForecast() {
     for (let i = 0; i < 5; i++) {
         document.getElementById("day" + (i + 1) + "Min").innerHTML = "Min: No Data";
