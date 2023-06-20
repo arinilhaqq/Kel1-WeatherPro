@@ -144,7 +144,6 @@ button {
 
 button:hover{
   background-color: #bcf1ff;
-  width: 20%;
 }
 
 .menu a.active {
